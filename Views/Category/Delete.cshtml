@@ -1,0 +1,20 @@
+@model Category
+
+<div class="container mt-4">
+    <div class="card text-center">
+        <div class="card-header bg-danger text-white">
+            Silme Onayı <!-- Silme onay başlığı -->
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Dikkat!</h5> <!-- Uyarı başlığı -->
+            <p class="card-text">
+                <b>@Model.Name</b> kategorisini silmek istediğinize emin misiniz? <!-- Silinecek kategori adı -->
+            </p>
+            <form asp-action="Delete" method="post"> <!-- Silme formu -->
+                <input type="hidden" name="id" value="@Model.Id" /> <!-- Gizli alan ile kategori ID'sini gönder -->
+                <button type="submit" class="btn btn-danger">Evet, Sil</button> <!-- Silme butonu -->
+                <a asp-action="Index" class="btn btn-secondary">Hayır, İptal Et</a> <!-- İptal butonu -->
+            </form>
+        </div>
+    </div>
+</div>

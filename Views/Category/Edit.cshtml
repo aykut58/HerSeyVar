@@ -1,0 +1,22 @@
+﻿@model Category
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title">Kategori Düzenle</h3> <!-- Kategori düzenleme başlığı -->
+        </div>
+        <div class="card-body">
+            <form asp-controller="Category" asp-action="edit" method="post"> <!-- Düzenleme formu -->
+                <input type="hidden" asp-for="Id"> <!-- Gizli alan ile kategori ID'sini gönder -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Kategori Adı</label>
+                    <input asp-for="Name" class="form-control" placeholder="Kategori adını giriniz..."> <!-- Kategori adı girişi -->
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-success me-md-2">Kaydet</button> <!-- Kaydet butonu -->
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a> <!-- İptal butonu -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

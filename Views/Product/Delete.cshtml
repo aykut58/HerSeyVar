@@ -1,0 +1,20 @@
+@model Product
+
+<div class="container mt-4">
+    <div class="card text-center">
+        <div class="card-header bg-danger text-white">
+            Silme Onayı <!-- Silme onayı başlığı -->
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Dikkat!</h5>
+            <p class="card-text">
+                <b>@Model.Name</b> Ürününü silmek istediğinize emin misiniz? <!-- Silinecek ürünün adıyla birlikte uyarı mesajı -->
+            </p>
+            <form asp-action="Delete" method="post"> <!-- Silme işlemi için form -->
+                <input type="hidden" name="id" value="@Model.Id" /> <!-- Ürün ID'sini gizli olarak gönder -->
+                <button type="submit" class="btn btn-danger">Evet, Sil</button> <!-- Silme butonu -->
+                <a asp-action="Index" class="btn btn-secondary">Hayır, İptal Et</a> <!-- İptal etme butonu -->
+            </form>
+        </div>
+    </div>
+</div>

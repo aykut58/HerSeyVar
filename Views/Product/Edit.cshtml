@@ -1,0 +1,73 @@
+﻿@model Product
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title text-center">Ürün Düzenle</h3> <!-- Sayfa başlığı -->
+        </div>
+        <div class="card-body">
+            <form asp-controller="Product" asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id"> <!-- Ürün ID'sini gizli alan olarak gönder -->
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Ürün Adı</label>
+                    <input asp-for="Name" class="form-control shadow-sm" placeholder="Ürün adını giriniz..." />
+                    <span asp-validation-for="Name" class="text-danger"></span> <!-- Ürün adı için doğrulama mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Açıklama</label>
+                    <textarea asp-for="Description" class="form-control shadow-sm" rows="3" placeholder="Ürün açıklamasını giriniz..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span> <!-- Açıklama için doğrulama mesajı -->
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Price" class="form-label">Fiyat</label>
+                        <input asp-for="Price" class="form-control shadow-sm" placeholder="Fiyatı giriniz..." />
+                        <span asp-validation-for="Price" class="text-danger"></span> <!-- Fiyat için doğrulama mesajı -->
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Stock" class="form-label">Stok</label>
+                        <input asp-for="Stock" class="form-control shadow-sm" placeholder="Stok miktarını giriniz..." />
+                        <span asp-validation-for="Stock" class="text-danger"></span> <!-- Stok için doğrulama mesajı -->
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Image" class="form-label">Ürün Fotoğrafı</label>
+                    <div class="mb-2">
+                        <!-- Mevcut ürün resmini göster -->
+                        <img src="@(Url.Content("~/img/" + Model.Image))" alt="Ürün Resmi" class="img-fluid img-thumbnail" style="max-width: 300px; height: auto;">
+                    </div>
+                    <input type="file" name="imageFile" id="imageFile" class="form-control shadow-sm" /> <!-- Yeni resim yükleme alanı -->
+                    <span asp-validation-for="Image" class="text-danger"></span> <!-- Resim için doğrulama mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CategoryId" class="form-label">Kategori</label>
+                    <select asp-for="CategoryId" class="form-select shadow-sm">
+                        <option value="0">Hepsi</option> <!-- Varsayılan seçenek -->
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            if (item.Id == Model.CategoryId) // Seçili kategori kontrolü
+                            {
+                                <option value="@item.Id" selected>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span> <!-- Kategori için doğrulama mesajı -->
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-success me-md-2">Kaydet</button> <!-- Kaydet butonu -->
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a> <!-- İptal butonu -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

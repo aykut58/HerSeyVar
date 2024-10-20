@@ -1,0 +1,25 @@
+@model IEnumerable<Product>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Ürünler</h2> <!-- Ürünler başlığı -->
+
+    <div class="row">
+        @foreach (var product in Model) // Her ürün için döngü
+        {
+            <div class="col-md-4 mb-4"> <!-- Ürün kartı için sütun -->
+                <div class="card h-100 shadow-sm">
+                    <!-- Eğer ürünün bir resmi varsa göster, yoksa placeholder kullan -->
+                    <img src="@(string.IsNullOrEmpty(product.Image) ? "https://via.placeholder.com/300x200" : Url.Content("~/img/" + product.Image))" class="card-img-top" alt="Product Image" width="300" height="200" style="object-fit: contain; border-radius: 10px;">
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@product.Name</h5> <!-- Ürün adı -->
+                        <p class="card-text text-muted">@product.Description</p> <!-- Ürün açıklaması -->
+                        <p class="card-text font-weight-bold text-primary">Fiyat: @product.Price ₺</p> <!-- Ürün fiyatı -->
+                        <a href="/Product/Details/@product.Id" class="btn btn-outline-primary mt-auto">Sepete Ekle</a> <!-- Sepete ekleme butonu -->
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

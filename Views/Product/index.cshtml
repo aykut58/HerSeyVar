@@ -1,0 +1,71 @@
+@model HerSeyVar.Helpers.PaginatedList<Product>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-4">Ürün Listesi</h2> <!-- Sayfa başlığı -->
+        <a href="/Product/Create" class="btn btn-primary">Ürün Ekle</a> <!-- Yeni ürün ekleme butonu -->
+    </div>
+
+    <table class="table table-striped table-hover"> <!-- Ürünleri listelemek için tablo -->
+        <thead class="table-dark">
+            <tr>
+                <th>Adı</th> <!-- Ürün adı sütunu -->
+                <th>Fiyatı</th> <!-- Ürün fiyatı sütunu -->
+                <th>Açıklama</th> <!-- Ürün açıklaması sütunu -->
+                <th>Stok</th> <!-- Ürün stok miktarı sütunu -->
+                <th>Kategori</th> <!-- Ürün kategorisi sütunu -->
+                <th class="text-center" style="width: 150px;">İşlemler</th> <!-- İşlemler sütunu -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items) 
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td> <!-- Ürün adını göster -->
+                    <td>@Html.DisplayFor(modelItem => item.Price) ₺</td> <!-- Ürün fiyatını göster -->
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td> <!-- Ürün açıklamasını göster -->
+                    <td>@Html.DisplayFor(modelItem => item.Stock)</td> <!-- Ürün stok miktarını göster -->
+                    <td>@Html.DisplayFor(modelItem => item.Category.Name)</td> <!-- Ürün kategorisini göster -->
+                    <td class="text-center"> <!-- İşlem butonları için sütun -->
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm mx-1">
+                            <i class="bi bi-pencil-square"></i> Düzenle <!-- Ürün düzenleme butonu -->
+                        </a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm mx-1">
+                            <i class="bi bi-trash"></i> Sil <!-- Ürün silme butonu -->
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Sayfalama Kısmı -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (Model.HasPreviousPage) 
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex - 1)" aria-label="Önceki">
+                        <span aria-hidden="true">&laquo;</span> <!-- Önceki sayfa simgesi -->
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++) 
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")"> <!-- Aktif sayfayı vurgula -->
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@i">@i</a>
+                </li>
+            }
+
+            @if (Model.HasNextPage) 
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex + 1)" aria-label="Sonraki">
+                        <span aria-hidden="true">&raquo;</span> <!-- Sonraki sayfa simgesi -->
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

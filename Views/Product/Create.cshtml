@@ -1,0 +1,56 @@
+﻿@model Product
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Yeni Ürün Ekle</h3> <!-- Form başlığı -->
+        </div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Model hatalarını göster -->
+            <form asp-controller="Product" asp-action="Create" method="post" enctype="multipart/form-data"> <!-- Ürün ekleme formu -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Ürün Adı</label>
+                    <input asp-for="Name" class="form-control shadow-sm" placeholder="Ürün adını girin" /> <!-- Ürün adı girişi -->
+                    <span asp-validation-for="Name" class="text-danger"></span> <!-- Ürün adı için hata mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Açıklama</label>
+                    <input asp-for="Description" class="form-control shadow-sm" placeholder="Ürün açıklamasını girin" /> <!-- Ürün açıklaması girişi -->
+                    <span asp-validation-for="Description" class="text-danger"></span> <!-- Ürün açıklaması için hata mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Fiyat</label>
+                    <input asp-for="Price" class="form-control shadow-sm" placeholder="Ürün fiyatını girin" /> <!-- Ürün fiyatı girişi -->
+                    <span asp-validation-for="Price" class="text-danger"></span> <!-- Ürün fiyatı için hata mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Stock" class="form-label">Stok</label>
+                    <input asp-for="Stock" class="form-control shadow-sm" placeholder="Ürün stok miktarını girin" /> <!-- Ürün stok girişi -->
+                    <span asp-validation-for="Stock" class="text-danger"></span> <!-- Ürün stoku için hata mesajı -->
+                </div>
+                
+                <div class="input-group mb-3">
+                    <input type="file" name="imageFile" id="imageFile" class="form-control" /> <!-- Ürün resmi yükleme -->
+                    <span asp-validation-for="Image" class="text-danger"></span> <!-- Resim yükleme için hata mesajı -->
+                </div>
+
+                <div class="mb-3">
+                    <label for="CategoryId" class="form-label">Kategori</label>
+                    <select asp-for="CategoryId" class="form-select shadow-sm"> <!-- Kategori seçimi -->
+                        <option value="">Kategori Seçin</option> <!-- Seçenek başlangıcı -->
+                        @foreach (var item in ViewBag.Categories) // Kategorileri listele
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span> <!-- Kategori seçimi için hata mesajı -->
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">Kaydet</button> <!-- Kaydet butonu -->
+            </form>
+        </div>
+    </div>
+</div>

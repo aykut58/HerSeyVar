@@ -1,0 +1,43 @@
+body {
+    background-color: #f7f8fc;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}

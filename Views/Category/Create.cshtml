@@ -1,0 +1,23 @@
+﻿@model HerSeyVar.Models.Category
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Yeni Kategori Ekle</h3> <!-- Form başlığı -->
+        </div>
+        <div class="card-body">
+            <!-- Model doğrulama hatalarını göster -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <form asp-controller="Category" asp-action="Create" method="post"> <!-- Form başlangıcı -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Kategori Adı</label> <!-- Kategori adı etiketi -->
+                    <input asp-for="Name" class="form-control shadow-sm" placeholder="Kategori adını girin" /> <!-- Kategori adı girişi -->
+                    <span asp-validation-for="Name" class="text-danger"></span> <!-- Kategori adı doğrulama hatası -->
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">Kaydet</button> <!-- Kaydet butonu -->
+            </form> <!-- Form sonu -->
+        </div>
+    </div>
+</div>
